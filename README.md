@@ -72,3 +72,31 @@ SELECT year, MAX(temperature)
     > WHERE temperature != 9999 AND quality IN (0, 1, 4, 5, 9)
     > GROUP BY year;
 ```
+
+####error
+ERROR XSDB6: Another instance of Derby may have already booted the database /Users/arun/apache-hive-1.1.0-bin/metastore_db.
+####reason
+By default Hive uses Derby to store metadata of the tables. Derby is a single instance database. So you might be running another instance in your machine. check the processes running in your machine
+```
+ps - ef| grep hive
+```
+
+get the process Id for the hive process and kill it
+```
+kill -9 {PID}
+```
+
+#### error
+Logging initialized using configuration in jar:file:/Users/arun/apache-hive-1.1.0-bin/lib/hive-common-1.1.0.jar!/hive-log4j.properties
+Exception in thread "main" java.lang.RuntimeException: java.net.ConnectException: Call to localhost/127.0.0.1:10001 failed on connection exception: java.net.ConnectException: Connection refused
+#### reason
+Possible reason :Hadoop services are not running
+#### solution
+Start hadoop services (namenode, SNN, Datanode, Task and Job tracker) and then use hive
+Note: you have to wait while the namenode comes out from safemode to run hive shell
+
+
+
+
+
+
