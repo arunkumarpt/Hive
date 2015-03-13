@@ -80,7 +80,7 @@ By default Hive uses Derby to store metadata of the tables. Derby is a single in
 ```
 ps - ef| grep hive
 ```
-
+####solution
 get the process Id for the hive process and kill it
 ```
 kill -9 {PID}
