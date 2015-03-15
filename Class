@@ -29,8 +29,7 @@ arun:input arun$ cat date
 
 
 CREATE TABLE datessource (id INT, data STRING, url STRING, logs STRING)
-  ROW FORMAT DELIMITED
-  FIELDS TERMINATED BY '\t';
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
 
 LOAD DATA LOCAL INPATH '/Users/arun/apache-hive-1.1.0-bin/input/date'
 INTO TABLE datessource
@@ -110,6 +109,37 @@ Apple,1,2,d1 - uniqueCust(u1)
 Apple,2,3,d2 - uniqueCust(u3,u2)
 
 The globalUnique would have been 3. Got it ?
+txid,storeId,UserId,day
+
+  
+  
+  
+  CREATE TABLE transactions (txid INT , storeId INT, UserId INT )
+  PARTITIONED BY ( day STRING)
+  ROW FORMAT DELIMITED FIELDS 
+  TERMINATED BY ",";
+  
+  
+
+  CREATE TABLE global (storeId INT , uniqueCust_global INT, totalTransctions_global INT)
+  //PARTITIONED BY (date STRING)
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+  
+  
+  
+  CREATE TABLE store (uniqueCust INT, totalTransctions_global INT)
+  PARTITIONED BY (day STRING, storeId INT );
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+  
+  CREATE TABLE userDetails ( storeId INT, userId INT)
+   ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+  
+  
+  
+  
+  
+  
+
 
 
 
