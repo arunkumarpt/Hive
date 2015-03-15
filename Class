@@ -51,6 +51,25 @@ delete the old data
 now hive have the new data.
 
 
+txn
+txid,day,uid,storeid    -> partionied by date
+
+
+managed
+
+global - by storeid
+storeid,uniquecust-global,totaltxn..
+
+managed
+
+day + storeid (partitions)
+storeid,uniquecustomer, total tx, day
+
+
+
+
+
+
 
 
 
