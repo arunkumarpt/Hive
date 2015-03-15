@@ -1,0 +1,57 @@
+### Hive Class - 3/24
+
+UDF, UDAF, UDTF
+ UDF   1-1
+
+UDAF   n-1
+
+UDTF  1 -n
+
+UDAF
+
+int()
+iterate()
+terminatePartial()
+terminate()
+merge()
+
+merge() -> iterate ()
+
+
+arun:input arun$ cat date 
+1 10-1-15 abc.com dsfsdfds
+2 11-5-14 google.com logs
+15 3-1-15 google.com gsdfdfd
+4 3-1-15 abcd.com dfdfdfsd
+5 3-21-13 cvf.com fdsdwdfd
+8 4-11-16 xyz.com sddfdfdf
+
+
+
+CREATE TABLE datessource (id INT, data STRING, url STRING, logs STRING)
+  ROW FORMAT DELIMITED
+  FIELDS TERMINATED BY '\t';
+
+LOAD DATA LOCAL INPATH '/Users/arun/apache-hive-1.1.0-bin/input/date'
+INTO TABLE datessource
+
+
+CREATE TABLE dates (id INT, url STRING, logs STRING)
+PARTITIONED BY (date STRING);
+
+
+pipeline 
+
+load data using pig
+for each to create hive structure
+
+
+delete the old data
+
+now hive have the new data.
+
+
+
+
+
+
