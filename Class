@@ -69,7 +69,47 @@ storeid,uniquecustomer, total tx, day
 
 
 
+Source: flat file schema: (txid is unique) logically partitioned on day
+/data/transactions/day0/<file>
+/data/transactions/day1/<file>
 
+txid,storeId,UserId,day
+
+Result:
+Table 1: storeId, uniqueCust_global, totalTransctions_global
+
+Table 2: storeId, uniqueCust, total_transactions, day
+
+Tip: 
+
+What is a uniqueCust?
+(storeId,userId)
+
+If the table is:
+t0,Apple,u1,d1 
+t1,Apple,u1,d1
+t2,Apple,u1,d2
+t3,Apple,u1,d2
+t4,Apple,u2,d2
+
+Result would be:
+Apple,2,5
+
+Apple,1,2,d1
+Apple,2,3,d2
+
+In the above result the uniqueCust_global is not a mere max(unique_cust), why?
+Because the cust values on d1 and d2 could be diff.
+
+ie. in the above case
+Apple,1,2,d1 - uniqueCust(u1)
+Apple,2,3,d2 - uniqueCust(u1,u2)
+
+what if
+Apple,1,2,d1 - uniqueCust(u1)
+Apple,2,3,d2 - uniqueCust(u3,u2)
+
+The globalUnique would have been 3. Got it ?
 
 
 
